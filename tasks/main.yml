@@ -1,0 +1,48 @@
+---
+# tasks file for motd
+- name: Install epel release repository
+  yum: 
+    name: epel-release 
+    state: latest
+- name: Install figlet
+  yum: 
+    name: figlet
+    state: latest
+- name: write motd text
+  shell:  figlet -f {{ motd_figlet_font }} {{ motd_text }} > /etc/motd
+  when: motd_text != ""
+- name: write motd with hostname
+  shell:  figlet -f {{ motd_figlet_font }} {{ ansible_hostname }} > /etc/motd
+  when: motd_text == ""  
+- name: copy system-info python script
+  copy:
+    src: files/system-info/system-info.py
+    dest: /etc/system-info.py
+    owner: root
+    group: root
+    mode: u=rwx,g=rx,o=rx
+- name: Install python pip
+  yum: 
+    name: python-pip
+    state: latest    
+- name: install the 'Development tools' package group
+  yum:
+    name: "@Development tools"
+    state: present    
+- name: Install python devel
+  yum: 
+    name: python-devel
+    state: latest        
+- name: install setuptools python library
+  pip:
+    name: setuptools    
+- name: install psutil python library
+  pip:
+    name: psutil
+- name: copy system-info etc profile script
+  copy:
+    src: files/system-info/system-info.sh
+    dest: /etc/profile.d/system-info.sh
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r

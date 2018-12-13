@@ -1,0 +1,18 @@
+galaxy_info:
+  author: Antonio Barbaro
+  description: Configure motd file with ascii art text and optionally print system informations
+  license: BSD
+
+  min_ansible_version: 1.9
+
+  platforms:
+  - name: EL
+    versions:
+    - 7
+
+
+  galaxy_tags: 
+    - motd
+    - figlet
+
+dependencies: []

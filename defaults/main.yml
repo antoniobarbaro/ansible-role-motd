@@ -1,0 +1,4 @@
+---
+# defaults file for motd
+motd_text: ''  # if string is empty will be replace with hostname
+motd_figlet_font: 'slant'
