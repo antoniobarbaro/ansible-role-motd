@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: motd
   author: Antonio Barbaro
   description: Configure motd file with ascii art text and optionally print system informations
   license: BSD
