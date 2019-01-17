@@ -22,7 +22,7 @@
     name: setuptools    
 - name: install psutil python library
   pip:
-    name: psutil
+    name: psutil>5.0.0
 - name: copy system-info etc profile script
   copy:
     src: files/system-info/system-info.sh
