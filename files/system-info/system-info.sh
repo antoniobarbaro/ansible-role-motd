@@ -1,1 +1,1 @@
-python /etc/system-info.py
+/etc/system-info/env/bin/python /etc/system-info/system-info.py

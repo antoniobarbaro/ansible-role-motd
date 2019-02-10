@@ -1,14 +1,27 @@
+- name: Create Folder system-info
+  file: 
+   path: "/etc/system-info"
+   recurse: yes
+   state: directory       
+- name: Install python virtualenv
+  yum: 
+    name: python-virtualenv
+    state: present       
 - name: copy system-info python script
   copy:
     src: files/system-info/system-info.py
-    dest: /etc/system-info.py
+    dest: /etc/system-info/system-info.py
     owner: root
     group: root
     mode: u=rwx,g=rx,o=rx
+- name: remove old system-info script file
+  file: 
+   path: "/etc/system-info.py"
+   state: absent
 - name: Install python pip
   yum: 
     name: python-pip
-    state: latest    
+    state: present    
 - name: install the 'Development tools' package group
   yum:
     name: "@Development tools"
@@ -16,13 +29,18 @@
 - name: Install python devel
   yum: 
     name: python-devel
-    state: latest        
-- name: install setuptools python library
-  pip:
-    name: setuptools    
-- name: install psutil python library
+    state: present        
+#- name: install setuptools python library
+#  pip:
+#    name: setuptools    
+- name: remove psutil pip library
   pip:
     name: psutil>5.0.0
+    state: absent
+- name: install psutil python library in virtualenv
+  pip:
+    name: psutil>5.0.0
+    virtualenv: /etc/system-info/env 
 - name: copy system-info etc profile script
   copy:
     src: files/system-info/system-info.sh
